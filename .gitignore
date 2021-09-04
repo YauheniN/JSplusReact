@@ -9,6 +9,7 @@ _test-output
 cypress.zip
 .babel-cache
 .jshintrc
+js-react.code-workspace
 
 */cypress/results/mochawesome/*.json
 cypress/reports/*
