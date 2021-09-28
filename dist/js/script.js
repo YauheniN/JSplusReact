@@ -119,7 +119,7 @@ window.addEventListener('DOMContentLoaded', () =>{
     // modalClose.addEventListener('click', closeModal);
 
     modal.addEventListener('click', (event) => {
-        if (event.target === modal  || event.target.getAttribute('data-close' == '')) {
+        if (event.target === modal  || event.target.getAttribute('data-close' == 'close')) {
             closeModal(); 
         }
     })
@@ -193,12 +193,20 @@ window.addEventListener('DOMContentLoaded', () =>{
         return await res.json();
     };
 
-    getResource('http://localhost:3000/menu')
-        .then((data) => {
-            data.forEach( ({img, altimg, title, descr, price}) => {
-                new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
-            });
+    // getResource('http://localhost:3000/menu')
+    //     .then((data) => {
+    //         data.forEach( ({img, altimg, title, descr, price}) => {
+    //             new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
+    //         });
+    //     });
+
+     axios.get('http://localhost:3000/menu')
+      .then((data) => {
+        console.log(data);  
+        data.data.forEach( ({img, altimg, title, descr, price}) => {
+            new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
         });
+    });   
 
     // getResource('http://localhost:3000/menu')
     //     .then(data => createCard(data));
@@ -324,7 +332,7 @@ window.addEventListener('DOMContentLoaded', () =>{
         thanksModal.classList.add('modal__dialog');
         thanksModal.innerHTML = `
             <div class ='modal__content'>
-                <div class="modal__close" data-close>×</div>
+                <div class="modal__close" data-close="">×</div>
                 <div class='modal__title'>${message}</div>
             </div>        
         `;
